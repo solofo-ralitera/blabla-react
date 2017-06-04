@@ -3,16 +3,16 @@ import {
     View,
     Text,
     TextInput,
-    Alert,
-    StyleSheet,
     TouchableOpacity,
 } from 'react-native'
-
-const loginAction = () => {
-    Alert.alert('Button has been pressed!');
-};
+import GlobalStyles from '../style/Style'
+import I18n from '../locales/i18n';
 
 export default class Login extends Component {
+    static navigationOptions = {
+        title : 'KKoozzyy!!',
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -20,59 +20,40 @@ export default class Login extends Component {
             passwordPlaceHolder: 'Password',
             buttonTitle : 'ok'
         };
+    }
+
+    loginAction() {
+        //Alert.alert('Button has been pressed!');
 
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
-            <View style={styles.container}>
-                <Text style={styles.title}>
+            <View style={GlobalStyles.body}>
+                <Text style={GlobalStyles.title}>
                     LOGIN
                 </Text>
                 <TextInput
-                    style={styles.input}
+                    style={GlobalStyles.input}
                     returnKeyType="next"
                     keyboardType="email-address"
-                    placeholder={this.state.usernamePlaceHolder}
+                    placeholder={I18n.t('username')}
                 />
                 <TextInput
-                    style={styles.input}
+                    style={GlobalStyles.input}
                     returnKeyType="go"
                     secureTextEntry
-                    placeholder={this.state.passwordPlaceHolder}
+                    placeholder={I18n.t('password')}
                 />
                 <TouchableOpacity
-                    onPress={loginAction}
+                    onPress={() => navigate('MainScreen')}
                 >
-                    <Text style={styles.button} >
-                        OK
+                    <Text style={GlobalStyles.button} >
+                        {I18n.t('login')}
                     </Text>
                 </TouchableOpacity>
             </View>
         )
     }
 }
-
-const styles = StyleSheet.create({
-    container : {
-        flex : 1,
-        backgroundColor : 'skyblue',
-        paddingHorizontal : 50,
-        paddingTop: 100
-    },
-    title : {
-        textAlign : 'center',
-        fontWeight : 'bold',
-    },
-    input : {
-        backgroundColor : 'powderblue',
-        marginVertical : 5,
-    },
-    button : {
-        textAlign : 'center',
-        padding : 5,
-        marginTop: 10,
-        color : 'darkblue',
-        backgroundColor : '#2980b9',
-    }
-});
