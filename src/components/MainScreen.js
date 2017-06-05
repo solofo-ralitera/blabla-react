@@ -4,10 +4,11 @@ import {
     Text,
 } from 'react-native'
 import GlobalStyles from '../style/Style'
+import { App } from '../globals/Global';
 
 export default class MainScreen extends Component {
     static navigationOptions = {
-        title: 'Welcome',
+        title: App.title,
     };
 
     render() {
